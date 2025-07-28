@@ -10,6 +10,13 @@ function NewsFeed() {
         loadNews();
     }, []);
 
+    // Initialize Feather icons after component renders
+    useEffect(() => {
+        if (window.feather) {
+            window.feather.replace();
+        }
+    }, [news]);
+
     const loadNews = async (refresh = false) => {
         if (refresh) {
             setRefreshing(true);

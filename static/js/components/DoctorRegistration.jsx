@@ -1,5 +1,5 @@
 function DoctorRegistration({ onLogin }) {
-    const { useState } = React;
+    const { useState, useEffect } = React;
     const [isLoginMode, setIsLoginMode] = useState(true);
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState('');
@@ -30,6 +30,13 @@ function DoctorRegistration({ onLogin }) {
         'Surgery', 'Urology', 'Ophthalmology', 'ENT (Otolaryngology)',
         'Gynecology', 'Anesthesiology', 'Emergency Medicine', 'Family Medicine'
     ];
+
+    // Initialize Feather icons after component renders
+    useEffect(() => {
+        if (window.feather) {
+            window.feather.replace();
+        }
+    }, [isLoginMode, message]);
 
     const handleLoginChange = (e) => {
         const { name, value } = e.target;

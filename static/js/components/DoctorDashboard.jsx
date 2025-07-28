@@ -27,6 +27,13 @@ function DoctorDashboard({ doctor, onLogout }) {
         loadAppointments();
     }, []);
 
+    // Initialize Feather icons after component renders
+    useEffect(() => {
+        if (window.feather) {
+            window.feather.replace();
+        }
+    }, [activeTab, appointments]);
+
     const loadDoctorProfile = async () => {
         try {
             const response = await axios.get(`/api/doctor/profile/${doctor.id}`);

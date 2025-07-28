@@ -4,6 +4,13 @@ function App() {
     const [currentView, setCurrentView] = useState('home');
     const [doctorSession, setDoctorSession] = useState(null);
 
+    // Initialize Feather icons after component renders
+    useEffect(() => {
+        if (window.feather) {
+            window.feather.replace();
+        }
+    }, [currentView]);
+
     // Check for existing doctor session on app load
     useEffect(() => {
         const savedSession = localStorage.getItem('doctorSession');

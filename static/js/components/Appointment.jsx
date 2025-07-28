@@ -21,6 +21,13 @@ function Appointment() {
         loadDoctors();
     }, []);
 
+    // Initialize Feather icons after component renders
+    useEffect(() => {
+        if (window.feather) {
+            window.feather.replace();
+        }
+    }, [doctors, message]);
+
     const loadDoctors = async () => {
         setLoading(true);
         try {

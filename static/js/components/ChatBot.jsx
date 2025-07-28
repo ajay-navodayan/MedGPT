@@ -22,6 +22,13 @@ function ChatBot() {
         scrollToBottom();
     }, [messages]);
 
+    // Initialize Feather icons after component renders
+    useEffect(() => {
+        if (window.feather) {
+            window.feather.replace();
+        }
+    }, [messages]);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         
