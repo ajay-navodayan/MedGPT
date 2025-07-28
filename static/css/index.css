@@ -1,0 +1,229 @@
+/* Custom medical-themed styles */
+:root {
+    --medical-blue: #0ea5e9;
+    --medical-blue-dark: #0284c7;
+    --health-green: #22c55e;
+    --health-green-dark: #16a34a;
+    --medical-gray: #64748b;
+    --medical-light: #f8fafc;
+}
+
+/* Smooth transitions */
+* {
+    transition: all 0.2s ease-in-out;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--medical-blue);
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--medical-blue-dark);
+}
+
+/* Medical gradient backgrounds */
+.medical-gradient {
+    background: linear-gradient(135deg, var(--medical-blue) 0%, var(--health-green) 100%);
+}
+
+.medical-gradient-light {
+    background: linear-gradient(135deg, #e0f2fe 0%, #dcfce7 100%);
+}
+
+/* Chat message animations */
+.message-enter {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: messageSlideIn 0.3s ease-out forwards;
+}
+
+@keyframes messageSlideIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Loading animation */
+.loading-dots {
+    display: inline-block;
+}
+
+.loading-dots::after {
+    content: '';
+    animation: dots 1.5s infinite;
+}
+
+@keyframes dots {
+    0%, 20% { content: ''; }
+    40% { content: '.'; }
+    60% { content: '..'; }
+    80%, 100% { content: '...'; }
+}
+
+/* Pulse animation for real-time elements */
+.pulse-slow {
+    animation: pulse 3s infinite;
+}
+
+/* Card hover effects */
+.card-hover {
+    transition: all 0.3s ease;
+}
+
+.card-hover:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Medical icons styling */
+.medical-icon {
+    color: var(--medical-blue);
+    transition: color 0.2s ease;
+}
+
+.medical-icon:hover {
+    color: var(--medical-blue-dark);
+}
+
+/* News feed styling */
+.news-item {
+    border-left: 4px solid var(--medical-blue);
+    transition: border-color 0.2s ease;
+}
+
+.news-item:hover {
+    border-left-color: var(--health-green);
+}
+
+/* Form styling */
+.form-input {
+    border: 2px solid #e2e8f0;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-input:focus {
+    border-color: var(--medical-blue);
+    box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1);
+    outline: none;
+}
+
+/* Button animations */
+.btn-medical {
+    background: var(--medical-blue);
+    color: white;
+    transition: all 0.2s ease;
+}
+
+.btn-medical:hover {
+    background: var(--medical-blue-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3);
+}
+
+.btn-health {
+    background: var(--health-green);
+    color: white;
+    transition: all 0.2s ease;
+}
+
+.btn-health:hover {
+    background: var(--health-green-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
+}
+
+/* Status indicators */
+.status-pending {
+    background-color: #fbbf24;
+    color: #92400e;
+}
+
+.status-confirmed {
+    background-color: #34d399;
+    color: #065f46;
+}
+
+.status-completed {
+    background-color: #60a5fa;
+    color: #1e40af;
+}
+
+.status-cancelled {
+    background-color: #f87171;
+    color: #991b1b;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .card-hover:hover {
+        transform: none;
+    }
+}
+
+/* Print styles */
+@media print {
+    .no-print {
+        display: none !important;
+    }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --medical-light: #1e293b;
+        --medical-gray: #94a3b8;
+    }
+}
+
+/* Accessibility improvements */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Focus indicators for keyboard navigation */
+button:focus,
+input:focus,
+select:focus,
+textarea:focus {
+    outline: 2px solid var(--medical-blue);
+    outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .medical-gradient {
+        background: var(--medical-blue);
+    }
+    
+    .card-hover {
+        border: 2px solid var(--medical-blue);
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
