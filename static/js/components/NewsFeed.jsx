@@ -1,4 +1,5 @@
 function NewsFeed() {
+    const { useState, useEffect } = React;
     const [news, setNews] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');

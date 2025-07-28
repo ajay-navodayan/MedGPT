@@ -1,4 +1,5 @@
 function Appointment() {
+    const { useState, useEffect } = React;
     const [doctors, setDoctors] = useState([]);
     const [selectedDoctor, setSelectedDoctor] = useState('');
     const [loading, setLoading] = useState(false);
@@ -317,7 +318,7 @@ function Appointment() {
                                         </>
                                     ) : (
                                         <>
-                                            <i data-feather="calendar-plus" className="w-4 h-4 mr-2 inline"></i>
+                                            <i data-feather="calendar" className="w-4 h-4 mr-2 inline"></i>
                                             Book Appointment
                                         </>
                                     )}

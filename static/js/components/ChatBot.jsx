@@ -104,7 +104,7 @@ function ChatBot() {
                     <div className="flex items-center justify-between">
                         <div className="flex items-center">
                             <div className="bg-white bg-opacity-20 rounded-full p-2 mr-3">
-                                <i data-feather="bot" className="w-6 h-6 text-white"></i>
+                                <i data-feather="message-square" className="w-6 h-6 text-white"></i>
                             </div>
                             <div>
                                 <h2 className="text-xl font-bold text-white">MedGPT Assistant</h2>
@@ -155,7 +155,7 @@ function ChatBot() {
                                                 ? 'user' 
                                                 : message.isError 
                                                     ? 'alert-circle' 
-                                                    : 'bot'
+                                                    : 'message-square'
                                         } className="w-5 h-5 text-white"></i>
                                     </div>
                                 </div>
@@ -191,7 +191,7 @@ function ChatBot() {
                         <div className="flex justify-start message-enter">
                             <div className="flex">
                                 <div className="w-8 h-8 rounded-full bg-health-500 flex items-center justify-center mr-3">
-                                    <i data-feather="bot" className="w-5 h-5 text-white"></i>
+                                    <i data-feather="message-square" className="w-5 h-5 text-white"></i>
                                 </div>
                                 <div className="bg-gray-100 rounded-2xl rounded-bl-sm px-4 py-3">
                                     <div className="flex items-center space-x-1">

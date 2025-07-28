@@ -1,4 +1,5 @@
 function DoctorDashboard({ doctor, onLogout }) {
+    const { useState, useEffect } = React;
     const [activeTab, setActiveTab] = useState('overview');
     const [appointments, setAppointments] = useState([]);
     const [loading, setLoading] = useState(false);

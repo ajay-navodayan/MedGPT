@@ -47,7 +47,7 @@ function App() {
                         onLogout={handleDoctorLogout} 
                     /> : <DoctorRegistration onLogin={handleDoctorLogin} />;
             default:
-                return <HomePage />;
+                return <HomePage setCurrentView={setCurrentView} />;
         }
     };
 
@@ -69,7 +69,7 @@ function App() {
     );
 }
 
-function HomePage() {
+function HomePage({ setCurrentView }) {
     return (
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
             {/* Hero Section */}
@@ -106,7 +106,7 @@ function HomePage() {
             <div className="grid md:grid-cols-3 gap-8 mb-16">
                 <div className="card-hover bg-white p-8 rounded-xl shadow-lg">
                     <div className="medical-icon text-center mb-6">
-                        <i data-feather="bot" className="w-16 h-16 mx-auto"></i>
+                        <i data-feather="message-square" className="w-16 h-16 mx-auto"></i>
                     </div>
                     <h3 className="text-2xl font-bold text-gray-900 mb-4 text-center">AI Medical Assistant</h3>
                     <p className="text-gray-600 text-center">

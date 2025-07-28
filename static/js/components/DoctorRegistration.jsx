@@ -1,4 +1,5 @@
 function DoctorRegistration({ onLogin }) {
+    const { useState } = React;
     const [isLoginMode, setIsLoginMode] = useState(true);
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState('');
