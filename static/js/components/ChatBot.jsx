@@ -22,12 +22,7 @@ function ChatBot() {
         scrollToBottom();
     }, [messages]);
 
-    // Initialize Feather icons after component renders
-    useEffect(() => {
-        if (window.feather) {
-            window.feather.replace();
-        }
-    }, [messages]);
+    // No longer needed - using SVG icons directly
 
     const handleSubmit = async (e) => {
         e.preventDefault();

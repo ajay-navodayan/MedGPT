@@ -21,12 +21,7 @@ function Appointment() {
         loadDoctors();
     }, []);
 
-    // Initialize Feather icons after component renders
-    useEffect(() => {
-        if (window.feather) {
-            window.feather.replace();
-        }
-    }, [doctors, message]);
+    // No longer needed - using SVG icons directly
 
     const loadDoctors = async () => {
         setLoading(true);
@@ -118,7 +113,9 @@ function Appointment() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <div className="text-center mb-8">
                 <div className="medical-gradient rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center">
-                    <i data-feather="calendar" className="w-8 h-8 text-white"></i>
+                    <MediumIcon className="w-8 h-8 text-white">
+                        <Icons.Calendar />
+                    </MediumIcon>
                 </div>
                 <h1 className="text-3xl font-bold text-gray-900 mb-2">Book an Appointment</h1>
                 <p className="text-gray-600">Schedule a consultation with our verified medical professionals</p>
@@ -325,8 +322,8 @@ function Appointment() {
                                         </>
                                     ) : (
                                         <>
-                                            <i data-feather="calendar" className="w-4 h-4 mr-2 inline"></i>
-                                            Book Appointment
+                                            <Icons.Calendar />
+                                            <span className="ml-2">Book Appointment</span>
                                         </>
                                     )}
                                 </button>

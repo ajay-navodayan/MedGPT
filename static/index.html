@@ -19,8 +19,7 @@
     <!-- Axios for API calls -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     
-    <!-- Feather Icons -->
-    <script src="https://unpkg.com/feather-icons"></script>
+    <!-- Custom SVG Icons (replacing Feather Icons) -->
     
     <!-- Configure Tailwind -->
     <script>
@@ -54,6 +53,7 @@
     <div id="root"></div>
     
     <!-- Load React Components -->
+    <script type="text/babel" src="/static/js/components/Icons.jsx"></script>
     <script type="text/babel" src="/static/js/components/Header.jsx"></script>
     <script type="text/babel" src="/static/js/components/Footer.jsx"></script>
     <script type="text/babel" src="/static/js/components/ChatBot.jsx"></script>
@@ -62,10 +62,5 @@
     <script type="text/babel" src="/static/js/components/DoctorRegistration.jsx"></script>
     <script type="text/babel" src="/static/js/components/DoctorDashboard.jsx"></script>
     <script type="text/babel" src="/static/js/App.jsx"></script>
-    
-    <script>
-        // Initialize Feather Icons
-        feather.replace();
-    </script>
 </body>
 </html>

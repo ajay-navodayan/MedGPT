@@ -4,12 +4,7 @@ function App() {
     const [currentView, setCurrentView] = useState('home');
     const [doctorSession, setDoctorSession] = useState(null);
 
-    // Initialize Feather icons after component renders
-    useEffect(() => {
-        if (window.feather) {
-            window.feather.replace();
-        }
-    }, [currentView]);
+    // No longer needed - using SVG icons directly
 
     // Check for existing doctor session on app load
     useEffect(() => {
@@ -82,7 +77,9 @@ function HomePage({ setCurrentView }) {
             {/* Hero Section */}
             <div className="text-center mb-16">
                 <div className="medical-gradient rounded-full w-24 h-24 mx-auto mb-8 flex items-center justify-center">
-                    <i data-feather="heart" className="w-12 h-12 text-white"></i>
+                    <MediumIcon className="w-12 h-12 text-white">
+                        <Icons.Heart />
+                    </MediumIcon>
                 </div>
                 <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
                     Welcome to <span className="text-medical-600">MedGPT</span>
@@ -96,14 +93,18 @@ function HomePage({ setCurrentView }) {
                         className="btn-medical px-8 py-3 rounded-lg font-semibold text-lg"
                         onClick={() => setCurrentView('chat')}
                     >
-                        <i data-feather="message-circle" className="w-5 h-5 mr-2 inline"></i>
+                        <SmallIcon className="w-5 h-5 mr-2 inline">
+                            <Icons.MessageSquare />
+                        </SmallIcon>
                         Start Medical Chat
                     </button>
                     <button 
                         className="btn-health px-8 py-3 rounded-lg font-semibold text-lg"
                         onClick={() => setCurrentView('appointment')}
                     >
-                        <i data-feather="calendar" className="w-5 h-5 mr-2 inline"></i>
+                        <SmallIcon className="w-5 h-5 mr-2 inline">
+                            <Icons.Calendar />
+                        </SmallIcon>
                         Book Appointment
                     </button>
                 </div>
@@ -113,7 +114,9 @@ function HomePage({ setCurrentView }) {
             <div className="grid md:grid-cols-3 gap-8 mb-16">
                 <div className="card-hover bg-white p-8 rounded-xl shadow-lg">
                     <div className="medical-icon text-center mb-6">
-                        <i data-feather="message-square" className="w-16 h-16 mx-auto"></i>
+                        <LargeIcon className="w-16 h-16 mx-auto text-health-500">
+                            <Icons.MessageSquare />
+                        </LargeIcon>
                     </div>
                     <h3 className="text-2xl font-bold text-gray-900 mb-4 text-center">AI Medical Assistant</h3>
                     <p className="text-gray-600 text-center">
@@ -124,7 +127,9 @@ function HomePage({ setCurrentView }) {
 
                 <div className="card-hover bg-white p-8 rounded-xl shadow-lg">
                     <div className="medical-icon text-center mb-6">
-                        <i data-feather="user-check" className="w-16 h-16 mx-auto"></i>
+                        <LargeIcon className="w-16 h-16 mx-auto text-medical-500">
+                            <Icons.UserMd />
+                        </LargeIcon>
                     </div>
                     <h3 className="text-2xl font-bold text-gray-900 mb-4 text-center">Expert Doctors</h3>
                     <p className="text-gray-600 text-center">
@@ -135,7 +140,9 @@ function HomePage({ setCurrentView }) {
 
                 <div className="card-hover bg-white p-8 rounded-xl shadow-lg">
                     <div className="medical-icon text-center mb-6">
-                        <i data-feather="activity" className="w-16 h-16 mx-auto"></i>
+                        <LargeIcon className="w-16 h-16 mx-auto text-health-500">
+                            <Icons.News />
+                        </LargeIcon>
                     </div>
                     <h3 className="text-2xl font-bold text-gray-900 mb-4 text-center">Medical News</h3>
                     <p className="text-gray-600 text-center">
