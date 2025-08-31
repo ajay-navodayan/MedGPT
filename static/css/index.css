@@ -206,7 +206,27 @@ select:focus,
 textarea:focus {
     outline: 2px solid var(--medical-blue);
     outline-offset: 2px;
+
 }
+
+.appointments-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.appointment-card {
+    background: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.status-pending { color: #f59e0b; }
+.status-confirmed { color: #10b981; }
+.status-completed { color: #3b82f6; }
+.status-cancelled { color: #ef4444; }
 
 /* High contrast mode support */
 @media (prefers-contrast: high) {

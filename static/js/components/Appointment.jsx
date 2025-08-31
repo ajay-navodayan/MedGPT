@@ -185,7 +185,7 @@ function Appointment() {
                                                     </span>
                                                     {doctor.consultation_fee > 0 && (
                                                         <span className="text-sm font-semibold text-health-600">
-                                                            ${doctor.consultation_fee}
+                                                            ₹{doctor.consultation_fee}
                                                         </span>
                                                     )}
                                                 </div>

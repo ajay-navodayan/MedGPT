@@ -7,17 +7,17 @@ def get_db_connection():
     """Get a connection to the PostgreSQL database"""
     try:
         conn = psycopg2.connect(
-            host=os.environ.get('PGHOST', 'localhost'),
-            port=os.environ.get('PGPORT', '5432'),
-            database=os.environ.get('PGDATABASE', 'medgpt'),
-            user=os.environ.get('PGUSER', 'user'),
-            password=os.environ.get('PGPASSWORD', 'password'),
-            cursor_factory=RealDictCursor
+            dbname='dhp2024',
+            user='postgres',
+            password='Ajay@123',
+            host='localhost',
+            port='5432'
         )
         return conn
     except psycopg2.Error as e:
         logging.error(f"Database connection error: {e}")
         raise
+
 
 def init_db():
     """Initialize database tables"""

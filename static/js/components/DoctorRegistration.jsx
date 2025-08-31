@@ -173,7 +173,7 @@ function DoctorRegistration({ onLogin }) {
                 {/* Toggle Tabs */}
                 <div className="flex">
                     <button
-                        className={`flex-1 py-4 px-6 text-center font-semibold transition-colors ${
+                        className={`fl$ex-1 py-4 px-6 text-center font-semibold transition-colors {
                             isLoginMode 
                                 ? 'bg-medical-500 text-white' 
                                 : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
@@ -390,7 +390,7 @@ function DoctorRegistration({ onLogin }) {
                                 </div>
                                 <div>
                                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                                        Consultation Fee ($)
+                                        Consultation Fee (₹)
                                     </label>
                                     <input
                                         type="number"

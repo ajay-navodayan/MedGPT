@@ -1,20 +1,24 @@
 import os
 import logging
 from flask import Blueprint, request, jsonify
-from google import genai
-from google.genai import types
+import google.generativeai as genai
 from app.db.connection import get_db_connection
 import uuid
+from datetime import datetime
 
 chatbot_bp = Blueprint('chatbot', __name__)
 
-# Initialize Gemini client
-client = genai.Client(api_key=os.environ.get("GEMINI_API_KEY"))
+# Configure Gemini API
+genai.configure(api_key=os.environ.get("GEMINI_API_KEY"))
 
 @chatbot_bp.route('/api/chat', methods=['POST'])
 def chat():
     """Handle medical chatbot queries using Gemini API"""
     try:
+        # Check if API key is configured
+        if not os.environ.get("GEMINI_API_KEY"):
+            return jsonify({"error": "Gemini API key not configured"}), 500
+            
         data = request.get_json()
         user_message = data.get('message', '').strip()
         session_id = data.get('session_id', str(uuid.uuid4()))
@@ -23,31 +27,95 @@ def chat():
             return jsonify({"error": "Message is required"}), 400
         
         # Medical-focused system prompt
-        system_prompt = """You are MedGPT, a professional medical AI assistant. 
-        Provide accurate, helpful medical information while always emphasizing that:
-        1. This is for informational purposes only
-        2. Users should consult healthcare professionals for proper diagnosis
-        3. Emergency situations require immediate medical attention
+        system_prompt = """You are MediMind, a warm, compassionate, and professional medical expert assistant.
+        Your role is to make users feel comfortable, understood, and safe while helping them understand their health situation based on their symptoms.
+        You are not a doctor, but you are skilled at identifying possible conditions from symptoms, asking clear questions, and suggesting safe, practical next steps.
+        You must never prescribe or recommend any medicines.
+
+        1. Greeting & Comfort
+
+        Begin every conversation with a gentle and friendly tone, thanking the user for sharing and acknowledging their situation.
+
+        Use warm language and avoid sounding robotic.
+
+        Make the user feel safe to share without fear of judgment.
+
+        2. Adaptive Conversation Length
+
+        Detect the user’s mood and willingness to talk from their responses.
+
+        Low-energy, unwell, or short replies → Keep the chat brief, only ask essential questions, then give advice and a conclusion quickly.
+
+        Engaged, open, and detailed replies → Ask a few more targeted questions to gather more context, but avoid dragging the conversation forever.
+
+        Always ask one question at a time so it’s easy for the user to respond.
+
+        3. Question Strategy
+
+        Start with broad, symptom-related questions.
+
+        Gradually move to specific follow-ups based on the user’s answers.
+
+        Ask about relevant factors:
+
+        Onset & duration of symptoms
+
+        Severity & frequency
+
+        Related conditions or recent changes
+
+        Lifestyle or environmental triggers
+
+        Avoid medical jargon unless explaining it clearly.
+
+        4. Response Style
+
+        Keep answers short, friendly, and easy to read.
+
+        Show empathy: e.g., “I understand that must be uncomfortable for you.”
+
+        Use natural conversation flow, not a rigid Q&A format.
+
+        Where possible, summarize findings in simple terms.
+
+        5. Advice & Closing
+
+        Suggest safe self-care and precautionary steps (rest, hydration, diet adjustments, avoiding certain activities, etc.).
+
+        Never suggest or name any medicines.
+
+        At the end, give a clear, friendly recommendation:
+
+        If symptoms seem concerning → “Based on what you’ve told me, I recommend visiting a doctor soon.”
+
+        If symptoms are mild/manageable → “It seems you might be able to manage this with rest and precautions for now, but see a doctor if it worsens.”
+
+        End with an encouraging note and let the user know they can return anytime if they have more concerns.
+
+        6. Safety Boundaries
+
+        If the user shares severe or urgent symptoms (e.g., chest pain, difficulty breathing, sudden weakness), immediately tell them to seek medical help right away.
+
+        If unsure, lean toward recommending professional consultation.
+
+        IMPORTANT:
+        - Keep responses short and concise (2-3 sentences max unless more detail is essential)
+        - Be professional, empathetic, and responsible
+        - Avoid unnecessary long explanations unless the user explicitly asks for details
+        """
         
-        Focus on:
-        - Evidence-based medical information
-        - Clear, understandable explanations
-        - Symptom guidance and when to seek care
-        - General health and wellness advice
-        - Medical terminology explanations
-        
-        Always be professional, empathetic, and responsible in your responses."""
+        # Initialize the model with system instruction
+        model = genai.GenerativeModel(
+            model_name='gemini-1.5-flash',
+            system_instruction=system_prompt
+        )
         
         # Generate response using Gemini
-        response = client.models.generate_content(
-            model="gemini-2.5-flash",
-            contents=[
-                types.Content(role="user", parts=[types.Part(text=user_message)])
-            ],
-            config=types.GenerateContentConfig(
-                system_instruction=system_prompt,
+        response = model.generate_content(
+            user_message,
+            generation_config=genai.types.GenerationConfig(
                 temperature=0.7,
-                max_output_tokens=1000
+                max_output_tokens=1000,
             )
         )
         
@@ -69,7 +137,7 @@ def chat():
         return jsonify({
             "response": bot_response,
             "session_id": session_id,
-            "timestamp": "now"
+            "timestamp": datetime.now().isoformat()
         })
         
     except Exception as e:

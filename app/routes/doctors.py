@@ -4,6 +4,23 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from app.db.connection import get_db_connection
 
 doctors_bp = Blueprint('doctors', __name__)
+import psycopg2
+import psycopg2.extras
+import os
+
+def get_db_connection():
+    return psycopg2.connect(
+        dbname="dhp2024",
+        user="postgres",
+        password="Ajay@123",
+        host="localhost",
+        cursor_factory=psycopg2.extras.RealDictCursor
+    )
+
+    # This makes fetchone()/fetchall() return dict-like rows
+    # conn.cursor_factory = psycopg2.extras.RealDictCursor
+    return conn
+
 
 @doctors_bp.route('/api/doctor/register', methods=['POST'])
 def register_doctor():
@@ -245,3 +262,7 @@ def update_doctor_profile(doctor_id):
     except Exception as e:
         logging.error(f"Error updating doctor profile: {e}")
         return jsonify({"error": "Internal server error"}), 500
+
+# UPDATE doctors
+# SET is_verified = true, updated_at = NOW()
+# WHERE is_verified = false;

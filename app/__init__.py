@@ -21,11 +21,13 @@ def create_app():
     from app.routes.appointments import appointments_bp
     from app.routes.doctors import doctors_bp
     from app.routes.news import news_bp
+    # from app.routes.users import users_bp
     
     app.register_blueprint(chatbot_bp)
     app.register_blueprint(appointments_bp)
     app.register_blueprint(doctors_bp)
     app.register_blueprint(news_bp)
+    
     
     @app.route('/')
     def index():
