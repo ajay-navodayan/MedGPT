@@ -1,5 +1,6 @@
 function ChatBot() {
     const { useState, useRef, useEffect } = React;
+    // aded a comt 
     const [messages, setMessages] = useState([
         {
             id: 1,
